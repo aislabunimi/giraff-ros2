@@ -1,0 +1,1 @@
+KERNEL=="ttyACM[0-9]*", SUBSYSTEMS=="usb", ATTRS{idVendor}=="2008", ATTRS{manufacturer}=="ThingMagic, Inc.", SYMLINK+="sensors/rfid"
