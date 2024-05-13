@@ -52,14 +52,6 @@ def launch_setup(context, *args, **kwargs):
         ),  
     ]
 
-    navigation_nodes = [
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(my_dir, 'nav2_launch.py')
-            )
-        )
-    ]
-
     #robot description for state_pùblisher
     robot_desc = xacro.process_file(os.path.join(my_dir, 'giraff.xacro'), mappings={'frame_ns': namespace})
     robot_desc = robot_desc.toprettyxml(indent='  ')
@@ -109,7 +101,6 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
     actions.extend(rviz)
-    actions.extend(navigation_nodes)
     actions.extend(hokuyo_node)
     actions.extend(status_publisher)
     #actions.extend(start_async_slam_toolbox_node)
