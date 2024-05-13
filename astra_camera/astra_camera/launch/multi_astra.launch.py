@@ -52,8 +52,8 @@ def generate_launch_description():
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    params1 = duplicate_params(default_params, "up", usb_port_up)
-    params2 = duplicate_params(default_params, "down", usb_port_down)
+    params1 = duplicate_params(default_params, "up", parse_substitution('$(var usb_port_up)'))
+    params2 = duplicate_params(default_params, "down", parse_substitution('$(var usb_port_down)'))
     container1 = generate_container_node("camera_up", params1)
     container2 = generate_container_node("camera_down", params2)
     # dummy static transformation from camera1 to camera2
