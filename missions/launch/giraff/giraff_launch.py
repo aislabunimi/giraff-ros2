@@ -30,7 +30,7 @@ def launch_setup(context, *args, **kwargs):
 
      # common variables
 
-    params_yaml_file = ParameterFile( os.path.join(my_dir, 'giraff_params.yaml'), allow_substs=True)
+    params_yaml_file = ParameterFile(os.path.join(my_dir, 'giraff_params.yaml'), allow_substs=True)
     
 
     giraff_driver = [
@@ -50,6 +50,18 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
         parameters=[params_yaml_file]
         ),  
+    ]
+
+    astra_cameras = [
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('astra_camera'), 'launch', 'multi_astra.launch.py')
+            ),
+            aunch_arguments={
+                'usb_port_down': '1-1.6',
+                'usb_port_up': '2-1.3',  # replace your usb port here
+            }.items()
+        )
     ]
 
     #robot description for state_pùblisher
@@ -89,6 +101,7 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(robot_state_publisher)
     actions.extend(rviz)
     actions.extend(hokuyo_node)
+    actions.extend(astra_cameras)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
