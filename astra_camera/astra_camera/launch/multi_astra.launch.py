@@ -8,6 +8,8 @@ import copy
 from os import path
 import yaml
 from launch_ros.actions import Node
+from launch.actions import DeclareLaunchArgument
+
 
 
 def generate_container_node(camera_name, params):
