@@ -50,12 +50,12 @@ def generate_launch_description():
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    serial_number1 = "18072430022" # overhead
-    serial_number2 = "18072430134" # neck
-    params1 = duplicate_params(default_params, "1", serial_number1)
-    params2 = duplicate_params(default_params, "2", serial_number2)
-    container1 = generate_container_node("camera1", params1)
-    container2 = generate_container_node("camera2", params2)
+    serial_number1 = "18072430022" # up
+    serial_number2 = "18072430134" # down
+    params1 = duplicate_params(default_params, "up", serial_number1)
+    params2 = duplicate_params(default_params, "down", serial_number2)
+    container1 = generate_container_node("camera_up", params1)
+    container2 = generate_container_node("camera_down", params2)
     # dummy static transformation from camera1 to camera2
     dummy_tf_node = launch_ros.actions.Node(
         package="tf2_ros",
@@ -67,8 +67,8 @@ def generate_launch_description():
             "0",
             "0",
             "0",
-            "camera1_link",
-            "camera2_link",
+            "camera_up_link",
+            "camera_down_link",
         ],
     )
     return LaunchDescription(
