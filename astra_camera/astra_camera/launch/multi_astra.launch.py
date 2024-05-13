@@ -42,6 +42,7 @@ def duplicate_params(general_params, posix, usb_port):
     local_params = copy.deepcopy(general_params)
     local_params["camera_name"] += posix
     local_params["usb_port"] = usb_port
+    local_params['device_num'] = 2
     return local_params
 
 
