@@ -91,25 +91,7 @@ def launch_setup(context, *args, **kwargs):
         ),
     ]
 
-    mqtt = [
-        Node(
-            package='mqtt_bridge',
-            executable='mqtt_bridge_node',
-            name='mqtt_bridge',
-            output='screen',
-            #prefix='xterm -hold -e',
-            parameters=[params_yaml_file]            
-            ),
-        
-        Node(
-            package='nav2_over_mqtt',
-            executable='mqtt2Nav2',
-            name='mqtt2Nav2',
-            output='screen',
-            prefix='xterm -hold -e',
-            parameters=[params_yaml_file]            
-            ),
-    ]
+
 
     status_publisher= [
         Node(
