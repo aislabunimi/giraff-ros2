@@ -26,11 +26,13 @@ def generate_launch_description():
             ComposableNode(package='astra_camera',
                            plugin='astra_camera::PointCloudXyzNode',
                            namespace='camera',
-                           name='point_cloud_xyz'),
+                           name='point_cloud_xyz',
+                           parameters=[config_params]),
             ComposableNode(package='astra_camera',
                            plugin='astra_camera::PointCloudXyzrgbNode',
                            namespace='camera',
-                           name='point_cloud_xyzrgb')
+                           name='point_cloud_xyzrgb',
+                           parameters=[config_params])
         ],
         output='screen')
     return LaunchDescription([container])
