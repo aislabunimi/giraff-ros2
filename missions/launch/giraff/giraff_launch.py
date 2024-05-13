@@ -84,25 +84,11 @@ def launch_setup(context, *args, **kwargs):
     ]
 
 
-
-    status_publisher= [
-        Node(
-            package='robot_status_publisher',
-            executable='robot_status_publisher_node',
-            name='status_publisher',
-            output='screen',
-            prefix='xterm -hold -e',
-            parameters=[params_yaml_file]
-            ), 
-    ]  
-
-
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
     actions.extend(rviz)
     actions.extend(hokuyo_node)
-    actions.extend(status_publisher)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
