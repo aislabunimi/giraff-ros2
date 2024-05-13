@@ -46,8 +46,8 @@ def duplicate_params(general_params, posix, usb_port):
 
 
 def generate_launch_description():
-    usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='2-1.3')
-    usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='1-1.6')
+    usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='1-1.6')
+    usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='2-1.3')
     params_file = get_package_share_directory("astra_camera") + "/params/astra_params.yaml"
     if not path.exists(params_file):
         print("path %s is not exists" % params_file)
