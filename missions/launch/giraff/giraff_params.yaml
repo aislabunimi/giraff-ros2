@@ -14,7 +14,7 @@ $(var namespace):
       angle_min: -1.4
       ip_port: 1853723
       #serial_port: '/dev/sensors/hokuyo_urg'
-      serial_port: '/dev/ttyACM0'
+      serial_port: '/dev/ttyACM1'
       serial_baud: 115200
       laser_frame_id: '$(var namespace)_laser_frame'
       laser_topic_name: 'laser_scan'
