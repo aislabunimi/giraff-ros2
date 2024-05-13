@@ -34,10 +34,10 @@ def generate_container_node(camera_name, params):
         output='screen')
 
 
-def duplicate_params(general_params, posix, serial_number):
+def duplicate_params(general_params, posix, usb_port):
     local_params = copy.deepcopy(general_params)
     local_params["camera_name"] += posix
-    local_params["serial_number"] = serial_number
+    local_params["usb_port"] = usb_port
     return local_params
 
 
@@ -50,10 +50,10 @@ def generate_launch_description():
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    serial_number1 = "18072430022" # up
-    serial_number2 = "18072430134" # down
-    params1 = duplicate_params(default_params, "up", serial_number1)
-    params2 = duplicate_params(default_params, "down", serial_number2)
+    usb_port_down = '1-1.6'
+    usb_port_up = '2-1.3'
+    params1 = duplicate_params(default_params, "up", usb_port_up)
+    params2 = duplicate_params(default_params, "down", usb_port_down)
     container1 = generate_container_node("camera_up", params1)
     container2 = generate_container_node("camera_down", params2)
     # dummy static transformation from camera1 to camera2
