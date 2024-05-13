@@ -104,29 +104,6 @@ def launch_setup(context, *args, **kwargs):
             ), 
     ]  
 
-    start_async_slam_toolbox_node = [
-        Node(
-            parameters=[
-            params_yaml_file,
-            {'use_sim_time': False}
-            ],
-            package='slam_toolbox',
-            executable='async_slam_toolbox_node',
-            name='slam_toolbox',
-            prefix="xterm -hold -e",
-            output='screen'
-        )
-    ]
-    keyboard_control=[
-        Node(
-            package='keyboard_control',
-            executable='keyboard_control_plus',
-            name='keyboard_control',
-            output='screen',
-            prefix="xterm -hold -e",
-            parameters=[params_yaml_file]
-            ),
-    ] 
 
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
@@ -134,7 +111,6 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(rviz)
     actions.extend(navigation_nodes)
     actions.extend(hokuyo_node)
-    actions.extend(mqtt)
     actions.extend(status_publisher)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
