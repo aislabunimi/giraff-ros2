@@ -42,6 +42,8 @@ def duplicate_params(general_params, posix, usb_port):
 
 
 def generate_launch_description():
+    usb_port_down = DeclareLaunchArgument('usb_port_down', default_value='2-1.3')
+    usb_port_up = DeclareLaunchArgument('usb_port_up', default_value='1-1.6')
     params_file = get_package_share_directory("astra_camera") + "/params/astra_params.yaml"
     if not path.exists(params_file):
         print("path %s is not exists" % params_file)
@@ -50,8 +52,6 @@ def generate_launch_description():
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    usb_port_down = '1-1.6'
-    usb_port_up = '2-1.3'
     params1 = duplicate_params(default_params, "up", usb_port_up)
     params2 = duplicate_params(default_params, "down", usb_port_down)
     container1 = generate_container_node("camera_up", params1)
@@ -72,4 +72,4 @@ def generate_launch_description():
         ],
     )
     return LaunchDescription(
-        [container1, container2, dummy_tf_node])
+        [container1, container2, usb_port_down, usb_port_up,  dummy_tf_node])
