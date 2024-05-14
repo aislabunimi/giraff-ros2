@@ -46,7 +46,7 @@ def launch_setup(context, *args, **kwargs):
         package='urg_node',
         executable='urg_node_driver',
         name='hokuyo_front',
-        prefix='xterm -hold -e',
+        #prefix='xterm -hold -e',
         output='screen',
         parameters=[params_yaml_file]
         ),  

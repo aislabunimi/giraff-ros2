@@ -15,13 +15,11 @@
 import os
 
 from launch import LaunchDescription
-from launch_ros.actions import PushRosNamespace
-from launch.actions import  SetEnvironmentVariable, DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 from launch_ros.parameter_descriptions import ParameterFile
 from ament_index_python.packages import get_package_share_directory
-
 
 
 def generate_launch_description():
@@ -36,8 +34,7 @@ def generate_launch_description():
     
     logger = LaunchConfiguration("log_level")
     
-    return LaunchDescription([DeclareLaunchArgument('namespace', default_value="giraff"),
-                              PushRosNamespace('giraff'),
+    return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
         
@@ -48,8 +45,28 @@ def generate_launch_description():
             ),
 
         # MAP_SERVER
+        Node(
+            package='nav2_map_server',
+            executable='map_server',
+            name='map_server',
+            output='screen',
+            prefix='xterm -hold -e',
+            parameters=[{'use_sim_time': use_sim_time},
+                        {'yaml_filename' : map_file}],
+            remappings=remappings
+            ),
 
-
+        # AMCL
+        Node(
+            package='nav2_amcl',
+            executable='amcl',
+            name='amcl',
+            output='screen',
+            parameters=[params_yaml_file],
+            remappings=remappings,
+            prefix='xterm -hold -e',
+            arguments=['--ros-args', '--log-level', logger],
+            ),
 
         # BT NAV
         Node(
@@ -108,8 +125,8 @@ def generate_launch_description():
             output='screen',
             parameters=[{'use_sim_time': use_sim_time},
                         {'autostart': True},
-                        {'node_names': [
-
+                        {'node_names': ['map_server',
+                                        'amcl',
                                         'planner_server',
                                         'controller_server',
                                         'bt_navigator',
@@ -117,9 +134,6 @@ def generate_launch_description():
                                         'waypoint_follower'
                                         ]
                         }
-                        ]
-            ),
-
-
-
+                       ]
+            )
     ])
