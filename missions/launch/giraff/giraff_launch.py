@@ -86,7 +86,6 @@ def launch_setup(context, *args, **kwargs):
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
-    actions.extend(rviz)
     actions.extend(hokuyo_node)
     actions.extend(astra_cameras)
     #actions.extend(start_async_slam_toolbox_node)
