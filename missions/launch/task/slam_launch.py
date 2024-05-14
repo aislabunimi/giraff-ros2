@@ -56,7 +56,6 @@ def generate_launch_description():
             name='rviz2',
             output='screen',
             arguments=['-d' +  os.path.join(get_package_share_directory('missions_pkg'), 'rviz', 'giraff.rviz')],
-            prefix="xterm -hold -e",
             remappings=[
                 ("/initialpose", "/giraff/initialpose"),
                 ("/goal_pose", "/giraff/goal_pose")
