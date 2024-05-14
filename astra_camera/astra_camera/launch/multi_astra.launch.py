@@ -29,11 +29,11 @@ def generate_container_node(camera_name, params):
             ComposableNode(package='astra_camera',
                            plugin='astra_camera::PointCloudXyzNode',
                            namespace=camera_name,
-                           name='point_cloud_xyz',parameters=[params]),
+                           name='point_cloud_xyz'),
             ComposableNode(package='astra_camera',
                            plugin='astra_camera::PointCloudXyzrgbNode',
                            namespace=camera_name,
-                           name='point_cloud_xyzrgb',parameters=[params])
+                           name='point_cloud_xyzrgb',)
         ],
         output='screen')
 
