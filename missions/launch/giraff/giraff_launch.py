@@ -80,20 +80,7 @@ def launch_setup(context, *args, **kwargs):
             ],
         )
     ]
-    rviz = [
-        Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            output='screen',
-            arguments=['-d' +  os.path.join(get_package_share_directory('missions_pkg'), 'rviz', 'giraff.rviz')],
-            prefix="xterm -hold -e",
-            remappings=[
-                ("/initialpose", "/giraff/initialpose"),
-                ("/goal_pose", "/giraff/goal_pose")
-            ]
-        ),
-    ]
+
 
 
     actions=[PushRosNamespace(namespace)]

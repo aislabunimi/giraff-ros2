@@ -1,17 +1,3 @@
-map_server:
-  ros__parameters:
-    use_sim_time: False
-    topic_name: "/map"
-    frame_id: "map"
-
-map_saver:
-  ros__parameters:
-    use_sim_time: False
-    save_map_timeout: 5.0
-    free_thresh_default: 0.25
-    occupied_thresh_default: 0.65
-    map_subscribe_transient_local: True
-
 slam_toolbox:
   ros__parameters:
 
@@ -24,10 +10,10 @@ slam_toolbox:
     ceres_loss_function: None
 
     # ROS Parameters
-    odom_frame: odom
+    odom_frame: giraff_odom
     map_frame: map
-    base_frame: base_link
-    scan_topic: /laser_scan
+    base_frame: giraff_base_link
+    scan_topic: /giraff/laser_scan
     mode: mapping #localization
 
     # if you'd like to immediately start continuing a map at a given pose

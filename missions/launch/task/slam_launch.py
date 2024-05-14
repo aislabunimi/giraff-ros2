@@ -23,7 +23,7 @@ def generate_launch_description():
     declare_slam_params_file_cmd = DeclareLaunchArgument(
         'slam_params_file',
         default_value=os.path.join(get_package_share_directory("missions_pkg"),
-                                   'launch', 'nav2_slam_params.yaml'),
+                                   'launch', 'task', 'slam_params.yaml'),
         description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
 
     start_async_slam_toolbox_node = Node(
@@ -37,13 +37,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    start_map_server = Node(
-        package='nav2_map_server',
-        executable='map_server',
-        name='map_server',
-        output='screen',
-        parameters=[{'use_sim_time': use_sim_time}]        
-    )
+
 
     start_lifecicle_mamanager = Node(
         package='nav2_lifecycle_manager',
@@ -56,13 +50,28 @@ def generate_launch_description():
                     ]
         )
 
+    rviz = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            output='screen',
+            arguments=['-d' +  os.path.join(get_package_share_directory('missions_pkg'), 'rviz', 'giraff.rviz')],
+            prefix="xterm -hold -e",
+            remappings=[
+                ("/initialpose", "/giraff/initialpose"),
+                ("/goal_pose", "/giraff/goal_pose")
+            ]
+        )
+
+
     # Add actions
     ld = LaunchDescription()
 
     ld.add_action(declare_use_sim_time_argument)
     ld.add_action(declare_slam_params_file_cmd)
     ld.add_action(start_async_slam_toolbox_node)
-    ld.add_action(start_map_server)
+    ld.add_action(rviz)
+
     ld.add_action(start_lifecicle_mamanager)
 
     return ld
