@@ -6,7 +6,7 @@ from launch.frontend.parse_substitution import parse_substitution
 
 def generate_launch_description():
 
-    use_odom = DeclareLaunchArgument('publish_odom', default_value="True")
+    use_odom = DeclareLaunchArgument('publish_odom', default_value="False")
     giraff = Node (
         package='giraff_ros2_driver',
         executable='giraff_node',
