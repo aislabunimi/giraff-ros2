@@ -20,7 +20,7 @@ slam_toolbox:
     # or at the dock, but they are mutually exclusive, if pose is given
     # will use pose
     #map_file_name: test_steve
-    # map_start_pose: [0.0, 0.0, 0.0]
+    map_start_pose: [0.0, 0.0, 0.0]
     #map_start_at_dock: true
 
     debug_logging: false
@@ -70,4 +70,4 @@ slam_toolbox:
     coarse_angle_resolution: 0.0349        
     minimum_angle_penalty: 0.9
     minimum_distance_penalty: 0.5
-    use_response_expansion: true
+    use_response_expansion: false

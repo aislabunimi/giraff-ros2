@@ -40,6 +40,21 @@ def launch_setup(context, *args, **kwargs):
             )
         )
     ]
+    odometry = [
+        Node(package='rf2o_laser_odometry',
+             executable='rf2o_laser_odometry_node',
+             name='rf2o_laser_odometry',
+             output='screen',
+             parameters=[{
+                 'laser_scan_topic' : '/giraff/laser_scan',
+                 'odom_topic' : '/giraff/odom',
+                 'publish_tf' : True,
+                 'base_frame_id' : 'giraff_base_link',
+                 'odom_frame_id' : 'giraff_odom',
+                 'init_pose_from_topic' : '',
+                 'freq' : 20.0}],
+             ),
+    ]
 
     hokuyo_node = [
         Node(
@@ -88,6 +103,7 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(robot_state_publisher)
     actions.extend(hokuyo_node)
     actions.extend(astra_cameras)
+    actions.extend(odometry)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
