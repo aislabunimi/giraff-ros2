@@ -52,7 +52,7 @@ def launch_setup(context, *args, **kwargs):
                  'base_frame_id' : 'giraff_base_link',
                  'odom_frame_id' : 'giraff_odom',
                  'init_pose_from_topic' : '',
-                 'freq' : 20.0}],
+                 'freq' : 100.0}],
              ),
     ]
 
