@@ -2,13 +2,13 @@ import sys
 from launch import LaunchDescription
 import launch_ros.actions
 from ament_index_python import get_package_share_directory
-from launch_ros.actions import ComposableNodeContainer, DeclareLaunchArgument, GroupAction, OpaqueFunction
+from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 import copy
 from os import path
 import yaml
 from launch_ros.actions import Node
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, GroupAction, OpaqueFunction
 from launch.frontend.parse_substitution import parse_substitution
 
 
@@ -98,4 +98,5 @@ def generate_launch_description():
         usb_port_down_parameter,
         usb_port_up_parameter,
         DeclareLaunchArgument('namespace', default_value='giraff'),
+        OpaqueFunction(function = launch_setup)
     ])
