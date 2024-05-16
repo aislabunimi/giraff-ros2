@@ -21,14 +21,14 @@ from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node, PushRosNamespace
 from launch_ros.parameter_descriptions import ParameterFile
 from ament_index_python.packages import get_package_share_directory
+from launch.frontend.parse_substitution import parse_substitution
 import xacro
 
+NAMESPACE = 'giraff_yellow'
+
 def launch_setup(context, *args, **kwargs):
-    # Get the launch directory
+
     namespace = LaunchConfiguration('namespace').perform(context)
-
-     # common variables
-
     params_yaml_file = ParameterFile(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff_params.yaml'), allow_substs=True)
     
 
@@ -45,11 +45,11 @@ def launch_setup(context, *args, **kwargs):
              name='rf2o_laser_odometry',
              output='screen',
              parameters=[{
-                 'laser_scan_topic' : '/giraff/laser_scan',
-                 'odom_topic' : '/giraff/odom',
+                 'laser_scan_topic' : '/laser_scan',
+                 'odom_topic' : '/odom',
                  'publish_tf' : True,
-                 'base_frame_id' : 'giraff_base_footprint',
-                 'odom_frame_id' : 'giraff_odom',
+                 'base_frame_id' : f'{parse_substitution("$(var usb_port_up)")}_base_footprint',
+                 'odom_frame_id' : f'{parse_substitution("$(var usb_port_up)")}_odom',
                  'init_pose_from_topic' : '',
                  'freq' : 50.0}],
              ),
@@ -117,12 +117,12 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
-        
+        DeclareLaunchArgument('namespace', default_value="giraff"),
         DeclareLaunchArgument(
             "log_level",
             default_value=["info"],  #debug, info
             description="Logging level",
             ),
-        DeclareLaunchArgument('namespace', default_value="giraff"),
+
         OpaqueFunction(function = launch_setup)
     ])
