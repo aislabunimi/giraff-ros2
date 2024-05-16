@@ -76,8 +76,8 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'multi_astra.launch.py')
             ),
             launch_arguments={
-                'usb_port_down': '1-1.3',
-                'usb_port_up': '2-1.6',
+                'serial_number_up': '18072330021',
+                'serial_number_down': '18072430160',
                 'namespace': namespace
             }.items()
         )
@@ -131,4 +131,3 @@ def generate_launch_description():
 
         OpaqueFunction(function = launch_setup)
     ])
-print('XXXXXXXXXXXXXXXXXXXXXXXX', f'{parse_substitution("$(var namespace)")}')
