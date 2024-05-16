@@ -25,12 +25,11 @@ import xacro
 
 def launch_setup(context, *args, **kwargs):
     # Get the launch directory
-    my_dir = os.path.join(get_package_share_directory('missions_pkg'), 'launch', 'giraff')
     namespace = LaunchConfiguration('namespace').perform(context)
 
      # common variables
 
-    params_yaml_file = ParameterFile(os.path.join(my_dir, 'giraff_params.yaml'), allow_substs=True)
+    params_yaml_file = ParameterFile(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff_params.yaml'), allow_substs=True)
     
 
     giraff_driver = [
@@ -49,10 +48,10 @@ def launch_setup(context, *args, **kwargs):
                  'laser_scan_topic' : '/giraff/laser_scan',
                  'odom_topic' : '/giraff/odom',
                  'publish_tf' : True,
-                 'base_frame_id' : 'giraff_base_link',
+                 'base_frame_id' : 'giraff_base_footprint',
                  'odom_frame_id' : 'giraff_odom',
                  'init_pose_from_topic' : '',
-                 'freq' : 100.0}],
+                 'freq' : 50.0}],
              ),
     ]
 
@@ -73,14 +72,14 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'multi_astra.launch.py')
             ),
             launch_arguments={
-                'usb_port_down': '1-1.6',
-                'usb_port_up': '2-1.3',  # replace your usb port here
+                'serial_number_down': '18072430160',
+                'serial_number_up': '18072330021',  # replace your usb port here
             }.items()
         )
     ]
 
     #robot description for state_pùblisher
-    robot_desc = xacro.process_file(os.path.join(my_dir, 'giraff.xacro'), mappings={'frame_ns': namespace})
+    robot_desc = xacro.process_file(os.path.join(get_package_share_directory('mission_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
     robot_desc = robot_desc.toprettyxml(indent='  ')
 
     robot_state_publisher = [

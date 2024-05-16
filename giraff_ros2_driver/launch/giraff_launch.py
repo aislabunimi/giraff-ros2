@@ -25,7 +25,7 @@ def generate_launch_description():
         {'stalk_frame_id':'giraff_neck'},
         {'head_frame_id':'giraff_head'},
         {'screen_frame_id':'giraff_screen'},
-        {'base_footprint_frame_id':''},
+        {'base_footprint_frame_id':'giraff_base_footprint'},
         {'camera_frame_id':'giraff_camera'},
         {'laser_frame_id':'giraff_laser_frame'},
         

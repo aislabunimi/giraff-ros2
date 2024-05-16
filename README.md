@@ -10,6 +10,7 @@ echo  "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
 colcon build --symlink-install
 ```
 * Install the udev rules of cameras, laser, and rfid running the `install.sh` script inside the `giraff_ros2_driver/scripts` folder
+* Set the serial number of the cameras inside the [giraff launch file](missions/launch/giraff_launch.py) 
 * Give the permission to serial ports `sudo adduser $USER dialout`
 * Reboot the system
 * Check the port of the hokuyo, it is on of `/dev/ttyAMC[0-9]`
