@@ -39,19 +39,18 @@ def generate_container_node(camera_name, params):
         output='screen')
 
 
-def duplicate_params(general_params, posix, usb_port):
+def duplicate_params(general_params, posix, serial_number):
     local_params = copy.deepcopy(general_params)
     local_params["camera_name"] += f'_{posix}'
-    #local_params["serial_number"] = str(serial_number)
+    local_params["serial_number"] = str(serial_number)
     local_params['device_num'] = 2
-    local_params['serial_number'] = str(usb_port)
     return local_params
 
 
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
-    usb_port_up = LaunchConfiguration('usb_port_up').perform(context)
-    usb_port_down = LaunchConfiguration('usb_port_down').perform(context)
+    serial_number_up = LaunchConfiguration('serial_number_up').perform(context)
+    serial_number_down = LaunchConfiguration('serial_number_down').perform(context)
 
     params_file = get_package_share_directory("astra_camera") + "/params/astra_params.yaml"
     if not path.exists(params_file):
@@ -61,8 +60,8 @@ def launch_setup(context, *args, **kwargs):
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    params1 = duplicate_params(default_params, "up", usb_port_up)
-    params2 = duplicate_params(default_params, "down", usb_port_down)
+    params1 = duplicate_params(default_params, "up", serial_number_up)
+    params2 = duplicate_params(default_params, "down", serial_number_down)
     container1 = generate_container_node("camera_up", params1)
     container2 = generate_container_node("camera_down", params2)
     # dummy static transformation from camera1 to camera2
@@ -89,15 +88,12 @@ def launch_setup(context, *args, **kwargs):
 
 
 def generate_launch_description():
-    #serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
-    #serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
-
-    usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='18072430160')
-    usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='18072330021')
+    serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
+    serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
 
     return LaunchDescription([
-        usb_port_down_parameter,
-        usb_port_up_parameter,
+        serial_number_up_parameter,
+        serial_number_down_parameter,
         DeclareLaunchArgument('namespace', default_value='giraff'),
         OpaqueFunction(function = launch_setup)
     ])
