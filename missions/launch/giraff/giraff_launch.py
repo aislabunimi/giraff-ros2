@@ -49,8 +49,8 @@ def launch_setup(context, *args, **kwargs):
              name='rf2o_laser_odometry',
              output='screen',
              parameters=[{
-                 'laser_scan_topic' : '/laser_scan',
-                 'odom_topic' : '/odom',
+                 'laser_scan_topic' : f'/{namespace}/laser_scan',
+                 'odom_topic' : f'/{namespace}/odom',
                  'publish_tf' : True,
                  'base_frame_id' : f'{namespace}_base_footprint',
                  'odom_frame_id' : f'{namespace}_odom',

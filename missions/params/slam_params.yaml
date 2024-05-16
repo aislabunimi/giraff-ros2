@@ -10,10 +10,10 @@ slam_toolbox:
     ceres_loss_function: None
 
     # ROS Parameters
-    odom_frame: giraff_odom
+    odom_frame: giraff_yellow_odom
     map_frame: map
-    base_frame: giraff_base_footprint
-    scan_topic: /giraff/laser_scan
+    base_frame: giraff_yellow_base_footprint
+    scan_topic: /giraff_yellow/laser_scan
     mode: mapping #localization
 
     # if you'd like to immediately start continuing a map at a given pose
