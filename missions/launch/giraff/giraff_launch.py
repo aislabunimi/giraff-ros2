@@ -72,8 +72,8 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'multi_astra.launch.py')
             ),
             launch_arguments={
-                'serial_number_down': '18072430160',
-                'serial_number_up': '18072330021',  # replace your usb port here
+                'serial_number_down': "'18072430160'",
+                'serial_number_up': "'18072330021'",  # replace your usb port here
             }.items()
         )
     ]

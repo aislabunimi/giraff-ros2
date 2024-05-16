@@ -47,8 +47,8 @@ def duplicate_params(general_params, posix, serial_number):
 
 
 def generate_launch_description():
-    serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
-    serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
+    serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value="'18072430160'")
+    serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value="'18072330021'")
     params_file = get_package_share_directory("astra_camera") + "/params/astra_params.yaml"
     if not path.exists(params_file):
         print("path %s is not exists" % params_file)
