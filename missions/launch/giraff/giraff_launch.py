@@ -103,7 +103,7 @@ def launch_setup(context, *args, **kwargs):
     nav2 = [
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('missions_pkg'), 'launch', 'nav2_launch.py')
+                os.path.join(get_package_share_directory('missions_pkg'), 'launch', 'giraff', 'nav2_launch.py')
             ),
             launch_arguments={
                 'namespace': namespace,
