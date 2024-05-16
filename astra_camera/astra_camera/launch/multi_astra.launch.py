@@ -44,7 +44,7 @@ def duplicate_params(general_params, posix, usb_port):
     local_params["camera_name"] += f'_{posix}'
     #local_params["serial_number"] = str(serial_number)
     local_params['device_num'] = 2
-    local_params['usb_port'] = str(usb_port)
+    local_params['serial_number'] = str(usb_port)
     return local_params
 
 
@@ -92,8 +92,8 @@ def generate_launch_description():
     #serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
     #serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
 
-    usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='1-1.3')
-    usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='2-1.6')
+    usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='18072430160')
+    usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='18072330021')
 
     return LaunchDescription([
         usb_port_down_parameter,
