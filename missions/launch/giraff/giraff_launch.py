@@ -88,7 +88,7 @@ def launch_setup(context, *args, **kwargs):
             executable='robot_state_publisher',
             parameters=[
                 {
-                    'use_sim_time': True, 
+                    'use_sim_time': False,
                     'robot_description': robot_desc
                 }
             ],
@@ -99,7 +99,7 @@ def launch_setup(context, *args, **kwargs):
 
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
-    #actions.extend(robot_state_publisher)
+    actions.extend(robot_state_publisher)
     actions.extend(hokuyo_node)
     actions.extend(astra_cameras)
     actions.extend(odometry)
