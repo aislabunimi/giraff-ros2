@@ -38,7 +38,7 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('giraff_ros2_driver'), 'launch', 'giraff_launch.py')
             ),
             launch_arguments={
-                'namespace': NAMESPACE,
+                'namespace': namespace,
             }.items()
 
         )
@@ -52,8 +52,8 @@ def launch_setup(context, *args, **kwargs):
                  'laser_scan_topic' : '/laser_scan',
                  'odom_topic' : '/odom',
                  'publish_tf' : True,
-                 'base_frame_id' : f'{parse_substitution("$(var namespace)")}_base_footprint',
-                 'odom_frame_id' : f'{parse_substitution("$(var namespace)")}_odom',
+                 'base_frame_id' : f'{namespace}_base_footprint',
+                 'odom_frame_id' : f'{namespace}_odom',
                  'init_pose_from_topic' : '',
                  'freq' : 50.0}],
              ),
@@ -78,7 +78,7 @@ def launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'usb_port_down': '1-1.3',
                 'usb_port_up': '2-1.6',
-                'namespace': NAMESPACE
+                'namespace': namespace
             }.items()
         )
     ]
@@ -131,3 +131,4 @@ def generate_launch_description():
 
         OpaqueFunction(function = launch_setup)
     ])
+print('XXXXXXXXXXXXXXXXXXXXXXXX', f'{parse_substitution("$(var namespace)")}')
