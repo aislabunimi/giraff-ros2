@@ -81,4 +81,7 @@ def generate_launch_description():
         ],
     )
     return LaunchDescription(
-        [usb_port_down_parameter, usb_port_up_parameter, container1, container2, dummy_tf_node])
+        [DeclareLaunchArgument('namespace', default_value='giraff'),
+         usb_port_down_parameter,
+         usb_port_up_parameter,
+         container1, container2, dummy_tf_node])

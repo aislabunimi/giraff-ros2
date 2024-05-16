@@ -36,7 +36,11 @@ def launch_setup(context, *args, **kwargs):
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('giraff_ros2_driver'), 'launch', 'giraff_launch.py')
-            )
+            ),
+            launch_arguments={
+                'namespace': NAMESPACE,
+            }.items()
+
         )
     ]
     odometry = [
@@ -73,7 +77,8 @@ def launch_setup(context, *args, **kwargs):
             ),
             launch_arguments={
                 'usb_port_down': '1-1.3',
-                'usb_port_up': '2-1.6',  # replace your usb port here
+                'usb_port_up': '2-1.6',
+                'namespace': NAMESPACE
             }.items()
         )
     ]
