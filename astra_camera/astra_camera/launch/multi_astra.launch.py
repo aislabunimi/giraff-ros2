@@ -38,18 +38,18 @@ def generate_container_node(camera_name, params):
         output='screen')
 
 
-def duplicate_params(general_params, posix, serial_number, usb_port):
+def duplicate_params(general_params, posix, usb_port):
     local_params = copy.deepcopy(general_params)
     local_params["camera_name"] += f'_{posix}'
-    local_params["serial_number"] = str(serial_number)
+    #local_params["serial_number"] = str(serial_number)
     local_params['device_num'] = 2
     local_params['usb_port'] = str(usb_port)
     return local_params
 
 
 def generate_launch_description():
-    serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
-    serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
+    #serial_number_down_parameter = DeclareLaunchArgument('serial_number_down', default_value='18072430160')
+    #serial_number_up_parameter = DeclareLaunchArgument('serial_number_up', default_value='18072330021')
 
     usb_port_down_parameter = DeclareLaunchArgument('usb_port_down', default_value='1-1.3')
     usb_port_up_parameter = DeclareLaunchArgument('usb_port_up', default_value='2-1.6')
@@ -61,8 +61,8 @@ def generate_launch_description():
         default_params = yaml.safe_load(file)
 
     # leave serial numbers empty to autoselect
-    params1 = duplicate_params(default_params, "up", parse_substitution('$(var serial_number_up)'), parse_substitution('$(var usb_port_up)'))
-    params2 = duplicate_params(default_params, "down", parse_substitution('$(var serial_number_down)'), parse_substitution('$(var usb_port_down)'))
+    params1 = duplicate_params(default_params, "up", parse_substitution('$(var usb_port_up)'))
+    params2 = duplicate_params(default_params, "down", parse_substitution('$(var usb_port_down)'))
     container1 = generate_container_node("camera_up", params1)
     container2 = generate_container_node("camera_down", params2)
     # dummy static transformation from camera1 to camera2
@@ -81,4 +81,4 @@ def generate_launch_description():
         ],
     )
     return LaunchDescription(
-        [serial_number_up_parameter, serial_number_down_parameter, usb_port_down_parameter, usb_port_up_parameter, container1, container2, dummy_tf_node])
+        [usb_port_down_parameter, usb_port_up_parameter, container1, container2, dummy_tf_node])
