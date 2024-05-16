@@ -28,7 +28,7 @@ def launch_setup(context, *args, **kwargs):
             {'stalk_frame_id': f'{namespace}_neck'},
             {'head_frame_id': f'{namespace}_head'},
             {'screen_frame_id': f'{namespace}_screen'},
-            {'base_footprint_frame_id': f'{namespace}_footprint'},
+            {'base_footprint_frame_id': f'{namespace}_base_footprint'},
             {'camera_frame_id': f'{namespace}_camera'},
             {'laser_frame_id': f'{namespace}_laser_frame'},
 
