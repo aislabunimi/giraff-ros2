@@ -1,7 +1,7 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, GroupAction, OpaqueFunction
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node, GroupAction, OpaqueFunction
+from launch_ros.actions import Node
 from launch.frontend.parse_substitution import parse_substitution
 
 namespace = ''
