@@ -48,8 +48,8 @@ def launch_setup(context, *args, **kwargs):
                  'laser_scan_topic' : '/laser_scan',
                  'odom_topic' : '/odom',
                  'publish_tf' : True,
-                 'base_frame_id' : f'{parse_substitution("$(var usb_port_up)")}_base_footprint',
-                 'odom_frame_id' : f'{parse_substitution("$(var usb_port_up)")}_odom',
+                 'base_frame_id' : f'{parse_substitution("$(var namespace)")}_base_footprint',
+                 'odom_frame_id' : f'{parse_substitution("$(var namespace)")}_odom',
                  'init_pose_from_topic' : '',
                  'freq' : 50.0}],
              ),
@@ -117,7 +117,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
-        DeclareLaunchArgument('namespace', default_value='ciao'),
+        DeclareLaunchArgument('namespace', default_value=NAMESPACE),
         DeclareLaunchArgument(
             "log_level",
             default_value=["info"],  #debug, info
