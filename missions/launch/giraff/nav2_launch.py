@@ -31,7 +31,7 @@ def generate_launch_description():
     # common variables
     use_sim_time = False
     remappings=[]
-    params_yaml_file = ParameterFile( os.path.join(my_dir, 'launch', 'giraff', 'nav2_params.yaml'), allow_substs=True)
+    params_yaml_file = ParameterFile( os.path.join(my_dir, 'params', 'nav2_params.yaml'), allow_substs=True)
     map_file = os.path.join(my_dir, 'maps', 'parking.yaml')
     
     logger = LaunchConfiguration("log_level")

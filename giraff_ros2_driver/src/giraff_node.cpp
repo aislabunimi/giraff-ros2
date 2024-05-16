@@ -367,7 +367,7 @@ int main(int argc, char** argv)
                 footprint_trans.child_frame_id = base_frame_id;
                 footprint_trans.transform.translation.x = 0.0;
                 footprint_trans.transform.translation.y = 0.0;
-                footprint_trans.transform.translation.z = 0.0;
+                footprint_trans.transform.translation.z = 0.2;
                 q.setRPY(0, 0, 0);
                 footprint_trans.transform.rotation = toMsg(q);
                 tf_broadcaster->sendTransform(footprint_trans);
