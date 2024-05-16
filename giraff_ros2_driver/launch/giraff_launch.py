@@ -51,6 +51,6 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-        DeclareLaunchArgument('namespace', default_value='giraff')
+        DeclareLaunchArgument('namespace', default_value='giraff'),
         OpaqueFunction(function=launch_setup)
     ])
