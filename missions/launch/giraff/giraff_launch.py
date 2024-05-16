@@ -100,6 +100,18 @@ def launch_setup(context, *args, **kwargs):
         )
     ]
 
+    nav2 = [
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('missions_pkg'), 'launch', 'nav2_launch.py')
+            ),
+            launch_arguments={
+                'namespace': namespace,
+            }.items()
+
+        )
+    ]
+
 
 
     actions=[PushRosNamespace(namespace)]
@@ -108,6 +120,7 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(hokuyo_node)
     actions.extend(astra_cameras)
     actions.extend(odometry)
+    actions.extend(nav2)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[

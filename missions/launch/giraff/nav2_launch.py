@@ -36,8 +36,9 @@ def generate_launch_description():
     
     logger = LaunchConfiguration("log_level")
     
-    return LaunchDescription([DeclareLaunchArgument('namespace', default_value="giraff"),
-                              PushRosNamespace('giraff'),
+    return LaunchDescription([
+        DeclareLaunchArgument('namespace', default_value="giraff"),
+
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
         
