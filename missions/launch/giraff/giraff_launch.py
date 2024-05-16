@@ -117,7 +117,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
-        DeclareLaunchArgument('namespace', 'ciao', default_value=NAMESPACE),
+        DeclareLaunchArgument('namespace', default_value='ciao'),
         DeclareLaunchArgument(
             "log_level",
             default_value=["info"],  #debug, info
