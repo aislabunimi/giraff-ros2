@@ -53,10 +53,10 @@ def launch_setup(context, *args, **kwargs):
         name='rviz2',
         output='screen',
         arguments=['-d' +  os.path.join(get_package_share_directory('missions_pkg'), 'rviz', 'giraff.rviz')],
-        #remappings=[
-            #("/initialpose", f"/{namespace}/initialpose"),
-            #("/goal_pose", f"/{namespace}/goal_pose")
-        #]
+        remappings=[
+            ("/initialpose", f"/{namespace}/initialpose"),
+            ("/goal_pose", f"/{namespace}/goal_pose")
+        ]
     )
 
     return [GroupAction([
