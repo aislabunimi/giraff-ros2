@@ -10,6 +10,7 @@ import yaml
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument, GroupAction, OpaqueFunction
 from launch.frontend.parse_substitution import parse_substitution
+from launch.substitutions import LaunchConfiguration
 
 
 
