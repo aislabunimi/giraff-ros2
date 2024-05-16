@@ -175,14 +175,15 @@ $(var namespace):
   global_costmap:
     global_costmap:
       ros__parameters:
+        map_topic: /map
         update_frequency: 1.0
-        publish_frequency: 1.0
+        publish_frequency: 0.5
         global_frame: map
         robot_base_frame: $(var namespace)_base_footprint
         robot_radius: 0.22
         resolution: 0.05
         track_unknown_space: true
-        plugins: ["obstacle_layer", "inflation_layer"]
+        plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
         obstacle_layer:
           plugin: "nav2_costmap_2d::ObstacleLayer"
           enabled: True
