@@ -79,7 +79,7 @@ def launch_setup(context, *args, **kwargs):
     ]
 
     #robot description for state_pùblisher
-    robot_desc = xacro.process_file(os.path.join(get_package_share_directory('mission_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
+    robot_desc = xacro.process_file(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
     robot_desc = robot_desc.toprettyxml(indent='  ')
 
     robot_state_publisher = [
