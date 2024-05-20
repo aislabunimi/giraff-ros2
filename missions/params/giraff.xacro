@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <!--
  URDF MODEL of GIRAFF-X
  - Here we set Fixed and movable joints
@@ -6,7 +7,7 @@
  - The resulting transform tree is then used to display all of the shapes in Rviz.
 -->
 
-<?xml version="1.0"?>
+
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="giraff">
 <xacro:arg name="frame_ns" default="giraff"/>
 
