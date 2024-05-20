@@ -40,7 +40,7 @@ def launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'namespace': namespace,
                 'publish_odom': False,
-                'public_other_tf': False
+                'publish_other_tf': False
             }.items()
 
         )
