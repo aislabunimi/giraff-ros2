@@ -39,7 +39,7 @@ def launch_setup(context, *args, **kwargs):
             ),
             launch_arguments={
                 'namespace': namespace,
-                'use_odom': False,
+                'publish_odom': False,
                 'public_other_tf': False
             }.items()
 
