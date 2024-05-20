@@ -37,6 +37,7 @@
   # Base footprint
   <link name="$(arg frame_ns)_base_footprint">
     <visual>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
      </visual>
   </link>
 
