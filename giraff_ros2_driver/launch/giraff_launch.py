@@ -9,7 +9,9 @@ namespace = ''
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
 
-    use_odom = DeclareLaunchArgument('publish_odom', default_value="False")
+    use_odom = DeclareLaunchArgument('publish_odom', default_value=False)
+    public_other_tf = DeclareLaunchArgument('public_other_tf', default_value=False)
+    print('XXXXXXXXX', public_other_tf)
     giraff = Node (
         package='giraff_ros2_driver',
         executable='giraff_node',
@@ -18,7 +20,7 @@ def launch_setup(context, *args, **kwargs):
         parameters=[
             {'giraff_avr_port':'/dev/ttyS1'},
             {'publish_odometry_over_tf':parse_substitution('$(var publish_odom)')},
-            {'publish_other_tf':True},
+            {'publish_other_tf':parse_substitution('$(var public_other_tf)')},
             {'odom_topic':'odom'},
             {'freq': 100.0},
             {'verbose':False},
@@ -45,7 +47,7 @@ def launch_setup(context, *args, **kwargs):
         ]
     )
 
-    return [GroupAction([use_odom, giraff])]
+    return [GroupAction([use_odom, public_other_tf, giraff])]
 
 def generate_launch_description():
 
