@@ -53,8 +53,8 @@ def generate_launch_description():
 
 
     return LaunchDescription([
-    DeclareLaunchArgument('publish_odom', default_value=False),
-    DeclareLaunchArgument('public_other_tf', default_value=False),
+    DeclareLaunchArgument('publish_odom', default_value='False'),
+    DeclareLaunchArgument('public_other_tf', default_value='False'),
         DeclareLaunchArgument('namespace', default_value='giraff'),
         OpaqueFunction(function=launch_setup)
     ])
