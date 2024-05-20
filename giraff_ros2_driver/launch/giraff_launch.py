@@ -11,7 +11,6 @@ def launch_setup(context, *args, **kwargs):
     publish_odom = LaunchConfiguration('publish_odom').perform(context)
     publish_other_tf = LaunchConfiguration('publish_other_tf').perform(context)
 
-    print('XXXXXXXXX', publish_other_tf, type(publish_other_tf))
     giraff = Node (
         package='giraff_ros2_driver',
         executable='giraff_node',
