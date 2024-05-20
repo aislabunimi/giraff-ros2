@@ -19,8 +19,8 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
         parameters=[
             {'giraff_avr_port':'/dev/ttyS1'},
-            {'publish_odometry_over_tf': publish_odom if type(publish_odom == bool) else (True if str(publish_odom) == 'True' else False)},
-            {'publish_other_tf': publish_other_tf if type(publish_other_tf == bool) else (True if str(publish_other_tf) == 'True' else False)},
+            {'publish_odometry_over_tf': publish_odom if isinstance(publish_odom, bool) else (True if str(publish_odom) == 'True' else False)},
+            {'publish_other_tf': publish_other_tf if isinstance(publish_other_tf, bool) else (True if str(publish_other_tf) == 'True' else False)},
             {'odom_topic':'odom'},
             {'freq': 100.0},
             {'verbose':False},
