@@ -199,7 +199,7 @@
     </visual>
   </link>
 
-  <joint name="base_link_to_laser_link" type="fixed">
+  <joint name="$(arg frame_ns)_base_link_to_laser_link" type="fixed">
     <parent link="$(arg frame_ns)_base_link"/>
     <child link="$(arg frame_ns)_laser_link"/>
     <origin rpy="0 0 0" xyz="0.2062 0.0 0.28"/>     # Set Manually z=0.28
