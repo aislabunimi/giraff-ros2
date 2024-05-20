@@ -35,7 +35,7 @@
   </material>
 
   # Base
-  <link name="base_link">
+  <link name="$(arg frame_ns)_base_link">
     <visual>
       <geometry>
         <cylinder length="0.20" radius="0.26"/>
@@ -45,9 +45,15 @@
     </visual>
   </link>
 
+  <joint name="$(arg frame_ns)_base_footprint_to_base_link" type="fixed">
+      <parent link="$(arg frame_ns)_base_footprint"/>
+      <child link="$(arg frame_ns)_base_link"/>
+      <origin rpy="0 0 0" xyz="0 0.24 0.10"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
+    </joint>
+
 
   # Left wheel
-  <link name="left_wheel">
+  <link name="$(arg frame_ns)_left_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>           # Displacement/rotation of the part center with respect the reference_link
       <geometry>
@@ -57,15 +63,15 @@
     </visual>
   </link>
 
-  <joint name="base_to_left_wheel_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="left_wheel"/>
+  <joint name="$(arg frame_ns)_base_to_left_wheel_joint" type="fixed">
+    <parent link="$(arg frame_ns)_base_link"/>
+    <child link="$(arg frame_ns)_left_wheel"/>
     <origin rpy="0 0 0" xyz="0 0.24 0.10"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
   </joint>
 
 
   # Right wheel
-  <link name="right_wheel">
+  <link name="$(arg frame_ns)_right_wheel">
     <visual>
       <origin rpy="1.57075 0 0" xyz="0 0 0"/>           # Displacement/rotation of the part center with respect the reference_link
       <geometry>
@@ -75,9 +81,9 @@
     </visual>
   </link>
 
-  <joint name="base_to_right_wheel_joint" type="fixed">
-    <parent link="base_link"/>
-    <child link="right_wheel"/>
+  <joint name="$(arg frame_ns)_base_to_right_wheel_joint" type="fixed">
+    <parent link="$(arg frame_ns)_base_link"/>
+    <child link="$(arg frame_ns)_right_wheel"/>
     <origin rpy="0 0 0" xyz="0 -0.24 0.10"/>            # Displacement/rotation of the reference_link with respect parent reference_link (TF)
   </joint>
 
