@@ -54,8 +54,8 @@
   <joint name="$(arg frame_ns)_base_footprint_to_base_link" type="fixed">
       <parent link="$(arg frame_ns)_base_footprint"/>
       <child link="$(arg frame_ns)_base_link"/>
-      <origin rpy="0 0 0" xyz="0 0.24 0.10"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
-    </joint>
+      <origin rpy="0 0 0" xyz="0 0 0.10"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
+  </joint>
 
 
   # Left wheel
@@ -187,7 +187,7 @@
 
 
   # Hokuyo front
-  <link name="laser_link">
+  <link name="$(arg frame_ns)_laser_link">
     <visual>
       <geometry>
         <box size="0.05 0.05 0.05"/>
@@ -198,9 +198,9 @@
   </link>
 
   <joint name="base_link_to_laser_link" type="fixed">
-    <parent link="base_link"/>
-    <child link="laser_link"/>
-    <origin rpy="0 0 0" xyz="0.2062 0.0 0.0"/>     # Set Manually z=0.28
+    <parent link="$(arg frame_ns)_base_link"/>
+    <child link="$(arg frame_ns)_laser_link"/>
+    <origin rpy="0 0 0" xyz="0.2062 0.0 0.28"/>     # Set Manually z=0.28
   </joint>
 
 
