@@ -47,7 +47,7 @@ def launch_setup(context, *args, **kwargs):
         ]
     )
 
-    return [GroupAction([use_odom, public_other_tf, giraff])]
+    return [GroupAction([giraff])]
 
 def generate_launch_description():
 
