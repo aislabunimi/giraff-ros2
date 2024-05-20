@@ -35,6 +35,12 @@
   </material>
 
   # Base
+  <link name="$(arg frame_ns)_base_footprint">
+
+  </link>
+
+
+  # Base
   <link name="$(arg frame_ns)_base_link">
     <visual>
       <geometry>
