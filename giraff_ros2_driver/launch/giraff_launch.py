@@ -9,8 +9,8 @@ namespace = ''
 def launch_setup(context, *args, **kwargs):
     namespace = LaunchConfiguration('namespace').perform(context)
 
-    use_odom = DeclareLaunchArgument('publish_odom', default_value=False)
-    public_other_tf = DeclareLaunchArgument('public_other_tf', default_value=False)
+    use_odom = DeclareLaunchArgument('publish_odom', default_value='False')
+    public_other_tf = DeclareLaunchArgument('public_other_tf', default_value='False')
     print('XXXXXXXXX', public_other_tf)
     giraff = Node (
         package='giraff_ros2_driver',
