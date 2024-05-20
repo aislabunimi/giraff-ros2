@@ -28,9 +28,9 @@
   <material name="green">
     <color rgba="0.0 0.9 0.0 1"/>
   </material>
-  
 
-  # Base
+
+  # Base_link
   
   <link name="$(arg frame_ns)_base_link">
     <visual>
@@ -38,7 +38,7 @@
         <cylinder length="0.23" radius="0.26"/>
       </geometry>
       <material name="blue"/>
-      <origin xyz="0 0 0.15"/>
+      <origin xyz="0 0 0.1"/>
     </visual>
   </link>
   
