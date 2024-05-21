@@ -78,8 +78,8 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
             ),
             launch_arguments={
-                'serial_number_up': '18072330021',
-                'serial_number_down': '18072430160',
+                'serial_number': '18072330021',
+                'camera_name': 'camera_up',
                 'namespace': namespace
             }.items()
         )
