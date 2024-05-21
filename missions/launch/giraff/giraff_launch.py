@@ -80,6 +80,7 @@ def launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'serial_number': '18072330021',
                 'camera_name': 'camera_up',
+                'device_num': '2',
                 'namespace': namespace
             }.items()
         ),
@@ -90,6 +91,7 @@ def launch_setup(context, *args, **kwargs):
             launch_arguments={
                 'serial_number': '18072430160',
                 'camera_name': 'camera_down',
+                'device_num': '2',
                 'namespace': namespace
             }.items()
         )
