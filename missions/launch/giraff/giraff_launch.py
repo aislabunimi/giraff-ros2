@@ -96,7 +96,7 @@ def launch_setup(context, *args, **kwargs):
             parameters=[
                 {
                     'use_sim_time': False,
-                    'robot_description': robot_desc
+                    'robot_description': robot_desc,
                 }
             ],
         )
