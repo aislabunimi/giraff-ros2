@@ -49,7 +49,7 @@ def launch_setup(context, *args, **kwargs):
         output='screen')
 
     return [GroupAction([
-        PushRosNamespace(namespace),
+        #PushRosNamespace(namespace),
         container,
     ])]
 
