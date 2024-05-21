@@ -37,7 +37,7 @@ def launch_setup(context, *args, **kwargs):
                            parameters=[config_params]),
             ComposableNode(package='astra_camera',
                            plugin='astra_camera::PointCloudXyzNode',
-                           namespace='camera',
+                           namespace=namespace,
                            name='point_cloud_xyz',
                            parameters=[config_params]),
             ComposableNode(package='astra_camera',
