@@ -72,6 +72,9 @@ void OBCameraNodeFactory::init() {
     RCLCPP_ERROR(logger_, "Initialize failed\n%s\n", openni::OpenNI::getExtendedError());
     exit(-1);
   }
+  else{
+  RCLCPP_INFO(logger_, "Initializing OBCameraNodeFactory")
+  }
   parameters_ = std::make_shared<Parameters>(this);
   use_uvc_camera_ = declare_parameter<bool>("uvc_camera.enable", false);
   serial_number_ = declare_parameter<std::string>("serial_number", "");
