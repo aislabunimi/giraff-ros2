@@ -22,6 +22,7 @@ def launch_setup(context, *args, **kwargs):
 
     config_params['serial_number'] = serial_number
     config_params['camera_name'] = camera_name
+    config_params['camera_link_frame_id'] = camera_name + '_link'
 
     container = ComposableNodeContainer(
         name='astra_camera_container',
