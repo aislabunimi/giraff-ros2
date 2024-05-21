@@ -1,10 +1,11 @@
-from launch import LaunchDescription, LaunchConfiguration
+from launch import LaunchDescription
 from launch_ros.actions import Node
 from ament_index_python import get_package_share_directory
 from launch_ros.actions import ComposableNodeContainer, PushRosNamespace
 from launch_ros.descriptions import ComposableNode
 from launch.actions import DeclareLaunchArgument, GroupAction, OpaqueFunction
 import yaml
+from launch.substitutions import LaunchConfiguration
 
 
 
