@@ -306,9 +306,9 @@ void OBCameraNode::getParameters() {
     depth_aligned_frame_id_[stream_index] = optical_frame_id_[COLOR];
   }
   setAndGetNodeParameter(parameters_, publish_tf_, "publish_tf", true);
-  setAndGetNodeParameter(parameters_, tf_publish_rate_, "tf_publish_rate", 10.0);
+  setAndGetNodeParameter(parameters_, tf_publish_rate_, "tf_publish_rate", 0.0);
   setAndGetNodeParameter(parameters_, camera_link_frame_id_, "camera_link_frame_id",
-                         DEFAULT_BASE_FRAME_ID);
+                         camera_link_frame_id_);
   setAndGetNodeParameter(parameters_, depth_align_, "depth_align", false);
   setAndGetNodeParameter(parameters_, color_depth_synchronization_, "color_depth_synchronization",
                          false);
