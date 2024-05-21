@@ -73,7 +73,7 @@ void OBCameraNodeFactory::init() {
     exit(-1);
   }
   else{
-  RCLCPP_INFO(logger_, "Initializing OBCameraNodeFactory")
+  RCLCPP_INFO(logger_, "Initializing OBCameraNodeFactory");
   }
   parameters_ = std::make_shared<Parameters>(this);
   use_uvc_camera_ = declare_parameter<bool>("uvc_camera.enable", false);
