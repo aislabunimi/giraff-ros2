@@ -49,14 +49,14 @@
         <cylinder length="0.20" radius="0.26"/>
       </geometry>
       <material name="body_color"/>
-      <origin rpy="0 0 0" xyz="0 0 0"/>              # Displacement/rotation of the part center with respect the reference_link (base_link)
+      <origin rpy="0 0 0" xyz="0 0 0.02"/>              # Displacement/rotation of the part center with respect the reference_link (base_link)
     </visual>
   </link>
 
   <joint name="$(arg frame_ns)_base_footprint_to_base_link" type="fixed">
       <parent link="$(arg frame_ns)_base_footprint"/>
       <child link="$(arg frame_ns)_base_link"/>
-      <origin rpy="0 0 0" xyz="0 0 0.10"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
+      <origin rpy="0 0 0" xyz="0 0 0"/>             # Displacement/rotation of the reference_link with respect parent reference_link (TF)
   </joint>
 
 
