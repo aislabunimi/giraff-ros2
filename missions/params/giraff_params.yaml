@@ -16,7 +16,7 @@ $(var namespace):
       #serial_port: '/dev/sensors/hokuyo_urg'
       serial_port: '/dev/ttyACM1'
       serial_baud: 115200
-      laser_frame_id: '$(var namespace)_laser_frame'
+      laser_frame_id: '$(var namespace)_laser_link'
       laser_topic_name: 'laser_scan'
       calibrate_time: False
       default_user_latency: -0.2

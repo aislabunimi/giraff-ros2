@@ -39,6 +39,8 @@ def launch_setup(context, *args, **kwargs):
             ),
             launch_arguments={
                 'namespace': namespace,
+                'publish_odom': 'False',
+                'publish_other_tf': 'False'
             }.items()
 
         )
@@ -73,11 +75,11 @@ def launch_setup(context, *args, **kwargs):
     astra_cameras = [
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('astra_camera'), 'launch', 'multi_astra.launch.py')
+                os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
             ),
             launch_arguments={
-                'serial_number_up': '18072330021',
-                'serial_number_down': '18072430160',
+                'serial_number': '18072330021',
+                'camera_name': 'camera_up',
                 'namespace': namespace
             }.items()
         )
@@ -94,7 +96,7 @@ def launch_setup(context, *args, **kwargs):
             parameters=[
                 {
                     'use_sim_time': False,
-                    'robot_description': robot_desc
+                    'robot_description': robot_desc,
                 }
             ],
         )

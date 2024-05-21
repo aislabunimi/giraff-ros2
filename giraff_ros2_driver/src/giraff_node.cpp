@@ -395,41 +395,41 @@ int main(int argc, char** argv)
                 q.setRPY(0, 0, 0);
                 camera_trans.transform.rotation = toMsg(q);
                 // tf_broadcaster->sendTransform(camera_trans);
+
+
+                float altura_en_metros = (116 + 0.025 * giraff->getStalk()) * 0.01;
+                float tilt_en_rad = giraff->getTilt() - tilt_bias;
+
+                // Publish TF (\base_link -> \stalk)
+                geometry_msgs::msg::TransformStamped stalk_trans;
+                stalk_trans.header.stamp = current_time;
+                stalk_trans.header.frame_id = base_frame_id;
+                stalk_trans.child_frame_id = stalk_frame_id;
+                stalk_trans.transform.translation.x = 0.0;
+                stalk_trans.transform.translation.y = 0.0;
+                stalk_trans.transform.translation.z = altura_en_metros;
+                q.setRPY(0, 0, 0);
+                stalk_trans.transform.rotation = toMsg(q);
+                tf_broadcaster->sendTransform(stalk_trans);
+
+                // Publish TF (\stalk -> \giraff_head)
+                geometry_msgs::msg::TransformStamped head_trans;
+                head_trans.header.stamp = current_time;
+                head_trans.header.frame_id = stalk_frame_id;
+                head_trans.child_frame_id = head_frame_id;
+                head_trans.transform.translation.x = 0.0;
+                head_trans.transform.translation.y = 0.0;
+                head_trans.transform.translation.z = 0.0;
+
+                q.setRPY(0.0, -tilt_en_rad, 0.0);
+                head_trans.transform.rotation = toMsg(q);
+                tf_broadcaster->sendTransform(head_trans);
+
+                // Publish the state of the batteries
+                sensor_msgs::msg::BatteryState battmsg;
+                giraff->getGiraffBatteryData(battmsg);
+                batteries_pub->publish(battmsg);
             }
-
-            float altura_en_metros = (116 + 0.025 * giraff->getStalk()) * 0.01;
-            float tilt_en_rad = giraff->getTilt() - tilt_bias;
-
-            // Publish TF (\base_link -> \stalk)
-            geometry_msgs::msg::TransformStamped stalk_trans;
-            stalk_trans.header.stamp = current_time;
-            stalk_trans.header.frame_id = base_frame_id;
-            stalk_trans.child_frame_id = stalk_frame_id;
-            stalk_trans.transform.translation.x = 0.0;
-            stalk_trans.transform.translation.y = 0.0;
-            stalk_trans.transform.translation.z = altura_en_metros;
-            q.setRPY(0, 0, 0);
-            stalk_trans.transform.rotation = toMsg(q);
-            tf_broadcaster->sendTransform(stalk_trans);
-
-            // Publish TF (\stalk -> \giraff_head)
-            geometry_msgs::msg::TransformStamped head_trans;
-            head_trans.header.stamp = current_time;
-            head_trans.header.frame_id = stalk_frame_id;
-            head_trans.child_frame_id = head_frame_id;
-            head_trans.transform.translation.x = 0.0;
-            head_trans.transform.translation.y = 0.0;
-            head_trans.transform.translation.z = 0.0;
-
-            q.setRPY(0.0, -tilt_en_rad, 0.0);
-            head_trans.transform.rotation = toMsg(q);
-            tf_broadcaster->sendTransform(head_trans);
-
-            // Publish the state of the batteries
-            sensor_msgs::msg::BatteryState battmsg;
-            giraff->getGiraffBatteryData(battmsg);
-            batteries_pub->publish(battmsg);
-
             // Buttons pressed
             //-----------------
             giraff->get_button_data(current_red, current_green, current_dial);
