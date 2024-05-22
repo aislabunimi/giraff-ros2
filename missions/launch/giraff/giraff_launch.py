@@ -84,6 +84,11 @@ def launch_setup(context, *args, **kwargs):
                 'namespace': namespace
             }.items()
         ),
+        Node(
+            package='topic_tools',
+            executable='throttle',
+            arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
@@ -98,12 +103,7 @@ def launch_setup(context, *args, **kwargs):
         Node(
             package='topic_tools',
             executable='throttle',
-            parameters=[
-                'messages',
-                f'{namespace}/camera_down/depth/point',
-                '1.0'
-            ],
-
+            arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
         )
     ]
 
