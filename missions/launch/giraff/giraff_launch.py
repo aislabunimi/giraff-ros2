@@ -87,7 +87,7 @@ def launch_setup(context, *args, **kwargs):
         Node(
             package='topic_tools',
             executable='throttle',
-            arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
+            arguments=['messages', f'/{namespace}/camera_up/depth/points', '10.0'],
         ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
@@ -167,7 +167,7 @@ def launch_setup(context, *args, **kwargs):
             'scan_time': 0.3333,
             'range_min': 0.45,
             'range_max': 4.0,
-            'use_inf': True,
+            'use_inf': False,
             'inf_epsilon': 1.0
         }],
         name='pointcloud_to_laserscan')
