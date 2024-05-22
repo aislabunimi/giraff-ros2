@@ -176,8 +176,6 @@
   <joint name="$(arg frame_ns)_neck_to_screen" type="revolute">
     <parent link="$(arg frame_ns)_head"/>
     <child link="$(arg frame_ns)_screen"/>
-    <axis xyz="0 1 0"/>
-    <limit effort="1000.0" lower="-2.094395102" upper="2.094395102" velocity="0.5"/>
     <origin rpy="0 0 0" xyz="0.02 0.0 0.0"/>
   </joint>
 
