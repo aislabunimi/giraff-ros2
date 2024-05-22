@@ -5,7 +5,7 @@ Install dependencies:
 * Run the following commands: 
 ```shell
 rosdep install --from-paths src -y --ignore-src
-sudo apt install ros-humble-rmw-cyclonedds-cpp ros-humble-nav2-* ros-humble-slam-toolbox ros-humble-nav2-lifecycle-manager ros-humble-magic-enum libuvc-dev libgoogle-glog-dev nlohmann-json3-dev xterm
+sudo apt install ros-humble-topic-tools ros-humble-rmw-cyclonedds-cpp ros-humble-nav2-* ros-humble-slam-toolbox ros-humble-nav2-lifecycle-manager ros-humble-magic-enum libuvc-dev libgoogle-glog-dev nlohmann-json3-dev xterm
 echo  "export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp" >> ~/.bashrc
 colcon build --symlink-install
 ```

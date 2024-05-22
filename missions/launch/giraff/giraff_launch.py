@@ -94,6 +94,16 @@ def launch_setup(context, *args, **kwargs):
                 'device_num': '2',
                 'namespace': namespace
             }.items()
+        ),
+        Node(
+            package='topic_tools',
+            executable='throttle',
+            parameters=[
+                'messages',
+                f'{namespace}/camera_down/depth/point',
+                '1.0'
+            ],
+
         )
     ]
 
