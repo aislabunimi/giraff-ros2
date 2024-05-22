@@ -15,7 +15,7 @@
 import os
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, OpaqueFunction, GroupAction
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable, OpaqueFunction, GroupAction, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node, PushRosNamespace
@@ -89,11 +89,6 @@ def launch_setup(context, *args, **kwargs):
             executable='throttle',
             arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
         ),
-        Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
-        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
@@ -109,13 +104,22 @@ def launch_setup(context, *args, **kwargs):
             package='topic_tools',
             executable='throttle',
             arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
-        ),
-        Node(
-            package="tf2_ros",
-            executable="static_transform_publisher",
-            arguments=["0.06", "0.0", "0.95", "0", "-0.2", "0", "giraff_yellow_base_link", "giraff_yellow_camera_down_link"],
-        ),
+        )
     ]
+
+    astra_cameras_tf = TimerAction(period=3.0,
+                actions=[
+                    Node(
+                        package="tf2_ros",
+                        executable="static_transform_publisher",
+                        arguments=["0.06", "0.0", "0.95", "0", "-0.2", "0", "giraff_yellow_base_link", "giraff_yellow_camera_down_link"],
+                    ),
+                    Node(
+                        package="tf2_ros",
+                        executable="static_transform_publisher",
+                        arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
+                    )
+                ]),
 
     #robot description for state_pùblisher
     robot_desc = xacro.process_file(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
@@ -155,6 +159,7 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(astra_cameras)
     actions.extend(odometry)
     actions.extend(nav2)
+    actions.extend(astra_cameras_tf)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
