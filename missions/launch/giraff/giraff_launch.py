@@ -164,7 +164,7 @@ def launch_setup(context, *args, **kwargs):
             'angle_min': -1.5708,  # -M_PI/2
             'angle_max': 1.5708,  # M_PI/2
             'angle_increment': 0.0087,  # M_PI/360.0
-            'scan_time': 0.3333,
+            'scan_time': 1.0/40.0,
             'range_min': 0.45,
             'range_max': 4.0,
             'use_inf': False,
