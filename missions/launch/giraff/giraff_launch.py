@@ -92,7 +92,7 @@ def launch_setup(context, *args, **kwargs):
         Node(
             package="tf2_ros",
             executable="static_transform_publisher",
-            arguments=["0.0", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
+            arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
         ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
