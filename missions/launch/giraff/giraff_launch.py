@@ -181,7 +181,7 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(odometry)
     actions.extend(nav2)
     actions.extend(astra_cameras_tf)
-    actions.extend(point_cloud_to_laser_scan)
+    #actions.extend(point_cloud_to_laser_scan)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
