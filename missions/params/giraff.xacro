@@ -192,11 +192,6 @@
       </visual>
     </link>
 
-    <joint name="$(arg frame_ns)_base_link_to_camera_down_link" type="fixed">
-      <parent link="$(arg frame_ns)_base_link"/>
-      <child link="$(arg frame_ns)_camera_down_link"/>
-      <origin rpy="0 -0.2 0" xyz="0.06 0.0 0.88"/>     # Manually set
-    </joint>
 
  # RGBD_UP
     # For ASTRA rgbd cameras ref_link is located 10cm in y-axis
@@ -210,12 +205,7 @@
       </visual>
     </link>
 
-    <joint name="$(arg frame_ns)_base_link_to_camera_up_link" type="fixed">
-      <parent link="$(arg frame_ns)_base_link"/>
-      <child link="$(arg frame_ns)_camera_up_link"/>
-      <!-- <origin rpy="0 0.8 0" xyz="0.09 0.10 1.65"/> -->     # Manually set
-      <origin rpy="0.0062 0.7527 0" xyz="0.06 0.0 1.4737"/>             # Calibration
-    </joint>
+
 
 
 
