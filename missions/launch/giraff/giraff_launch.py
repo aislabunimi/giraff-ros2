@@ -119,7 +119,7 @@ def launch_setup(context, *args, **kwargs):
                         executable="static_transform_publisher",
                         arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
                     )
-                ]),
+    ])
 
     #robot description for state_pùblisher
     robot_desc = xacro.process_file(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
@@ -150,7 +150,9 @@ def launch_setup(context, *args, **kwargs):
         )
     ]
 
-    point_cloud_to_laser_scan = [Node(
+    point_cloud_to_laser_scan =  TimerAction(
+        period=3.0,
+        actions=[Node(
         package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
         remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
                     ('scan', [namespace, '/laser_scan_local'])],
@@ -168,8 +170,9 @@ def launch_setup(context, *args, **kwargs):
             'use_inf': True,
             'inf_epsilon': 1.0
         }],
-        name='pointcloud_to_laserscan'
-    )]
+        name='pointcloud_to_laserscan')
+        ]
+    )
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
