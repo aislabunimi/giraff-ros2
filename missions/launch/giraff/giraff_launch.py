@@ -164,7 +164,7 @@ def launch_setup(context, *args, **kwargs):
             'angle_min': -1.5708,  # -M_PI/2
             'angle_max': 1.5708,  # M_PI/2
             'angle_increment': 0.0087,  # M_PI/360.0
-            'scan_time': 1.0/40.0,
+            'scan_time': 0.33,
             'range_min': 0.45,
             'range_max': 4.0,
             'use_inf': False,
@@ -180,8 +180,8 @@ def launch_setup(context, *args, **kwargs):
     actions.extend(astra_cameras)
     actions.extend(odometry)
     actions.extend(nav2)
-    #actions.extend(astra_cameras_tf)
-    #actions.extend(point_cloud_to_laser_scan)
+    actions.extend(astra_cameras_tf)
+    actions.extend(point_cloud_to_laser_scan)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
