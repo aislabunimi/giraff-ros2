@@ -158,7 +158,7 @@ $(var namespace):
           mark_threshold: 0
           observation_sources: scan
           scan:
-            topic: /$(var namespace)/laser_scan
+            topic: /$(var namespace)/laser_scan_local
             max_obstacle_height: 2.0
             clearing: True
             marking: True
