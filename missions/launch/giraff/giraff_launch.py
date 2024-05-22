@@ -167,7 +167,7 @@ def launch_setup(context, *args, **kwargs):
             'scan_time': 0.33,
             'range_min': 0.45,
             'range_max': 4.0,
-            'use_inf': False,
+            'use_inf': True,
             'inf_epsilon': 1.0
         }],
         name='pointcloud_to_laserscan')
