@@ -173,7 +173,7 @@
     </visual>
   </link>
 
-  <joint name="$(arg frame_ns)_neck_to_screen" type="revolute">
+  <joint name="$(arg frame_ns)_head_to_screen" type="fixed">
     <parent link="$(arg frame_ns)_head"/>
     <child link="$(arg frame_ns)_screen"/>
     <origin rpy="0 0 0" xyz="0.02 0.0 0.0"/>
