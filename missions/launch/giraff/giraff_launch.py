@@ -150,7 +150,7 @@ def launch_setup(context, *args, **kwargs):
         )
     ]
 
-    point_cloud_to_laser_scan = Node(
+    point_cloud_to_laser_scan = [Node(
         package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
         remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
                     ('scan', [namespace, '/laser_scan_local'])],
@@ -169,7 +169,7 @@ def launch_setup(context, *args, **kwargs):
             'inf_epsilon': 1.0
         }],
         name='pointcloud_to_laserscan'
-    )
+    )]
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
