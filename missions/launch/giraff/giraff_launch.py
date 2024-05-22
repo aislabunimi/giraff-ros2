@@ -89,6 +89,11 @@ def launch_setup(context, *args, **kwargs):
             executable='throttle',
             arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
         ),
+        Node(
+            package="tf2_ros",
+            executable="static_transform_publisher",
+            arguments=["0.0", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
+        ),
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
