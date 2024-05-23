@@ -30,7 +30,7 @@ def launch_setup(context, *args, **kwargs):
 
     namespace = LaunchConfiguration('namespace').perform(context)
     params_yaml_file = ParameterFile(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff_params.yaml'), allow_substs=True)
-    
+
 
     giraff_driver = [
         IncludeLaunchDescription(
@@ -63,16 +63,16 @@ def launch_setup(context, *args, **kwargs):
 
     hokuyo_node = [
         Node(
-        package='urg_node',
-        executable='urg_node_driver',
-        name='hokuyo_front',
-        #prefix='xterm -hold -e',
-        output='screen',
-        parameters=[params_yaml_file]
-        ),  
+            package='urg_node',
+            executable='urg_node_driver',
+            name='hokuyo_front',
+            #prefix='xterm -hold -e',
+            output='screen',
+            parameters=[params_yaml_file]
+        ),
     ]
 
-    astra_cameras = [
+    astra_camera_up = [
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
@@ -89,37 +89,42 @@ def launch_setup(context, *args, **kwargs):
         #    executable='throttle',
         #    arguments=['messages', f'/{namespace}/camera_up/depth/points', '10.0'],
         #),
-        IncludeLaunchDescription(
-            PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
+        ]
+    astra_camera_down = [TimerAction(
+        period=2,
+        actions=[
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
+                ),
+                launch_arguments={
+                    'serial_number': '18072430160',
+                    'camera_name': 'camera_down',
+                    'device_num': '2',
+                    'namespace': namespace
+                }.items()
             ),
-            launch_arguments={
-                'serial_number': '18072430160',
-                'camera_name': 'camera_down',
-                'device_num': '2',
-                'namespace': namespace
-            }.items()
-        ),
-        #Node(
-        #    package='topic_tools',
-        #    executable='throttle',
-        #    arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
-        #)
-    ]
+            #Node(
+            #    package='topic_tools',
+            #    executable='throttle',
+            #    arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
+            #)
+        ]
+    )]
 
     astra_cameras_tf = [TimerAction(period=3.0,
-                actions=[
-                    Node(
-                        package="tf2_ros",
-                        executable="static_transform_publisher",
-                        arguments=["0.06", "0.0", "0.95", "0", "-0.2", "0", "giraff_yellow_base_link", "giraff_yellow_camera_down_link"],
-                    ),
-                    Node(
-                        package="tf2_ros",
-                        executable="static_transform_publisher",
-                        arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
-                    )
-    ])]
+                                    actions=[
+                                        Node(
+                                            package="tf2_ros",
+                                            executable="static_transform_publisher",
+                                            arguments=["0.06", "0.0", "0.95", "0", "-0.2", "0", "giraff_yellow_base_link", "giraff_yellow_camera_down_link"],
+                                        ),
+                                        Node(
+                                            package="tf2_ros",
+                                            executable="static_transform_publisher",
+                                            arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
+                                        )
+                                    ])]
 
     #robot description for state_pùblisher
     robot_desc = xacro.process_file(os.path.join(get_package_share_directory('missions_pkg'), 'params', 'giraff.xacro'), mappings={'frame_ns': namespace})
@@ -153,40 +158,41 @@ def launch_setup(context, *args, **kwargs):
     point_cloud_to_laser_scan = [TimerAction(
         period=3.0,
         actions=[Node(
-        package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
-        remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
-                    ('scan', [namespace, '/laser_scan_local'])],
-        parameters=[{
-            'target_frame': f'{namespace}_laser_link',
-            'transform_tolerance': 0.01,
-            'min_height': 0.05,
-            'max_height': 2.0,
-            'angle_min': -1.5708,  # -M_PI/2
-            'angle_max': 1.5708,  # M_PI/2
-            'angle_increment': 0.0087,  # M_PI/360.0
-            'scan_time': 0.33,
-            'range_min': 0.45,
-            'range_max': 4.0,
-            'use_inf': True,
-            'inf_epsilon': 1.0
-        }],
-        name='pointcloud_to_laserscan')
+            package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
+            remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
+                        ('scan', [namespace, '/laser_scan_local'])],
+            parameters=[{
+                'target_frame': f'{namespace}_laser_link',
+                'transform_tolerance': 0.01,
+                'min_height': 0.05,
+                'max_height': 2.0,
+                'angle_min': -1.5708,  # -M_PI/2
+                'angle_max': 1.5708,  # M_PI/2
+                'angle_increment': 0.0087,  # M_PI/360.0
+                'scan_time': 0.33,
+                'range_min': 0.45,
+                'range_max': 4.0,
+                'use_inf': True,
+                'inf_epsilon': 1.0
+            }],
+            name='pointcloud_to_laserscan')
         ]
     )]
     actions=[PushRosNamespace(namespace)]
     actions.extend(giraff_driver)
     actions.extend(robot_state_publisher)
     actions.extend(hokuyo_node)
-    actions.extend(astra_cameras)
+    actions.extend(astra_camera_up)
+    actions.extend(astra_camera_down)
     actions.extend(odometry)
-    actions.extend(nav2)
+    #actions.extend(nav2)
     actions.extend(astra_cameras_tf)
-    actions.extend(point_cloud_to_laser_scan)
+    #actions.extend(point_cloud_to_laser_scan)
     #actions.extend(start_async_slam_toolbox_node)
     #actions.extend(keyboard_control)
     return[
         GroupAction
-        (
+            (
             actions=actions
         ),
     ]
@@ -201,7 +207,7 @@ def generate_launch_description():
             "log_level",
             default_value=["info"],  #debug, info
             description="Logging level",
-            ),
+        ),
 
         OpaqueFunction(function = launch_setup)
     ])
