@@ -117,7 +117,7 @@ $(var namespace):
 
   controller_server:
     ros__parameters:
-      controller_frequency: 20.0
+      controller_frequency: 10.0
       min_x_velocity_threshold: 0.001
       min_y_velocity_threshold: 0.5
       min_theta_velocity_threshold: 0.001
@@ -148,9 +148,9 @@ $(var namespace):
         debug_trajectory_details: True
         min_vel_x: 0.0
         min_vel_y: 0.0
-        max_vel_x: 0.26
+        max_vel_x: 0.2
         max_vel_y: 0.0
-        max_vel_theta: 1.0
+        max_vel_theta: 0.6
         min_speed_xy: 0.0
         max_speed_xy: 0.26
         min_speed_theta: 0.0
@@ -165,7 +165,7 @@ $(var namespace):
         vx_samples: 20
         vy_samples: 5
         vtheta_samples: 20
-        sim_time: 1.7
+        sim_time: 2
         linear_granularity: 0.05
         angular_granularity: 0.025
         transform_tolerance: 0.2
@@ -231,13 +231,13 @@ $(var namespace):
     global_costmap:
       ros__parameters:
         update_frequency: 1.0
-        publish_frequency: 1.0
+        publish_frequency: 0.5
         global_frame: map
         robot_base_frame: $(var namespace)_base_footprint
         robot_radius: 0.22
         resolution: 0.05
         track_unknown_space: true
-        plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+        plugins: ["static_layer", "inflation_layer"]
         obstacle_layer:
           plugin: "nav2_costmap_2d::ObstacleLayer"
           enabled: True
