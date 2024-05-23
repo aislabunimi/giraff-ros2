@@ -56,7 +56,6 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
-            prefix='xterm -hold -e',
             parameters=[{'use_sim_time': use_sim_time},
                         {'yaml_filename' : map_file}],
             remappings=remappings
@@ -69,7 +68,6 @@ def generate_launch_description():
             output='screen',
             parameters=[params_yaml_file],
             remappings=remappings,
-            prefix='xterm -hold -e',
             arguments=['--ros-args', '--log-level', logger],
         ),
         # BT NAV
