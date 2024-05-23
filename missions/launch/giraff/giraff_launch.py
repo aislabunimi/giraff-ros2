@@ -93,6 +93,7 @@ def launch_setup(context, *args, **kwargs):
     astra_camera_down = [TimerAction(
         period=2.0,
         actions=[
+            PushRosNamespace(namespace),
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
                     os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
@@ -101,7 +102,7 @@ def launch_setup(context, *args, **kwargs):
                     'serial_number': '18072430160',
                     'camera_name': 'camera_down',
                     'device_num': '2',
-                    'namespace': namespace
+                    'namespace': namespace,
                 }.items()
             ),
             #Node(
