@@ -121,7 +121,7 @@ def launch_setup(context, *args, **kwargs):
 
     astra_cameras_tf = [TimerAction(period=2.0,
                                     actions=[
-                                        PushRosNamespace(namespace),
+
                                         Node(
                                             package="tf2_ros",
                                             executable="static_transform_publisher",
