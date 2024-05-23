@@ -1,4 +1,3 @@
-
 # Copyright (c) 2018 Intel Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +17,8 @@ import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from launch.substitutions import LaunchConfiguration
-from launch_ros.actions import Node
-from nav2_common.launch import RewrittenYaml
+from launch_ros.actions import Node, PushRosNamespace
+from launch_ros.parameter_descriptions import ParameterFile
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -30,7 +29,7 @@ def generate_launch_description():
     # common variables
     use_sim_time = False
     remappings=[]
-    params_yaml_file = os.path.join(my_dir, 'params', 'navigation_params.yaml')
+    params_yaml_file = ParameterFile( os.path.join(my_dir, 'params', 'navigation_params.yaml'), allow_substs=True)
     map_file = os.path.join(my_dir, 'maps', 'aislab.yaml')
 
     logger = LaunchConfiguration("log_level")
@@ -38,12 +37,15 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
-        DeclareLaunchArgument(
-            'namespace',
-            default_value='giraff_yellow'),
+        PushRosNamespace('giraff_yellow'),
         DeclareLaunchArgument(
             "log_level",
             default_value=["info"],  #debug, info
+            description="Logging level",
+        ),
+        DeclareLaunchArgument(
+            "namespace",
+            default_value='giraff_yellow',  #debug, info
             description="Logging level",
         ),
 
@@ -53,6 +55,7 @@ def generate_launch_description():
             executable='map_server',
             name='map_server',
             output='screen',
+            prefix='xterm -hold -e',
             parameters=[{'use_sim_time': use_sim_time},
                         {'yaml_filename' : map_file}],
             remappings=remappings
@@ -66,7 +69,8 @@ def generate_launch_description():
             output='screen',
             parameters=[params_yaml_file],
             remappings=remappings,
-            arguments=['--ros-args', '--log-level', logger]
+            prefix='xterm -hold -e',
+            arguments=['--ros-args', '--log-level', logger],
         ),
 
         # BT NAV
@@ -88,27 +92,28 @@ def generate_launch_description():
             remappings=remappings
         ),
 
-        # CONTROLLER (local planner / path following)
+        # CONTROLLER (path following / local planber)
         Node(
             package='nav2_controller',
             executable='controller_server',
             name='controller_server',
             output='screen',
-            parameters=[params_yaml_file]
+            parameters=[params_yaml_file],
+            remappings=[]
         ),
 
-        # RECOVERIES (recovery behaviours NOT YET in HUMBLE)
+        # RECOVERIES (recovery behaviours)
         Node(
             package='nav2_behaviors',
             executable='behavior_server',
             name='behavior_server',
             output='screen',
             parameters=[params_yaml_file],
-            remappings=remappings),
+            remappings=remappings
+        ),
 
 
-
-        # WAYPOINT NAV (app to launch the BT navigator)
+        # WAYPOINT NAV (app that launch the Bt navigator)
         Node(
             package='nav2_waypoint_follower',
             executable='waypoint_follower',
@@ -131,7 +136,8 @@ def generate_launch_description():
                                         'controller_server',
                                         'bt_navigator',
                                         'behavior_server',
-                                        'waypoint_follower']
+                                        'waypoint_follower'
+                                        ]
                          }
                         ]
         )
