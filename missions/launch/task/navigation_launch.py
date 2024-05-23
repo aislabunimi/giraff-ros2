@@ -21,6 +21,7 @@ from launch_ros.actions import Node, PushRosNamespace
 from launch_ros.parameter_descriptions import ParameterFile
 from ament_index_python.packages import get_package_share_directory
 
+NAMESPACE = 'giraff_yellow'
 
 def generate_launch_description():
     # Get the launch directory
@@ -37,7 +38,7 @@ def generate_launch_description():
     return LaunchDescription([
         # Set env var to print messages to stdout immediately
         SetEnvironmentVariable('RCUTILS_LOGGING_BUFFERED_STREAM', '1'),
-        PushRosNamespace('giraff_yellow'),
+        PushRosNamespace(NAMESPACE),
         DeclareLaunchArgument(
             "log_level",
             default_value=["info"],  #debug, info
@@ -45,7 +46,7 @@ def generate_launch_description():
         ),
         DeclareLaunchArgument(
             "namespace",
-            default_value='giraff_yellow',  #debug, info
+            default_value=NAMESPACE,  #debug, info
             description="Logging level",
         ),
 
@@ -60,7 +61,6 @@ def generate_launch_description():
                         {'yaml_filename' : map_file}],
             remappings=remappings
         ),
-
         # AMCL
         Node(
             package='nav2_amcl',
@@ -72,7 +72,6 @@ def generate_launch_description():
             prefix='xterm -hold -e',
             arguments=['--ros-args', '--log-level', logger],
         ),
-
         # BT NAV
         Node(
             package='nav2_bt_navigator',
@@ -81,7 +80,6 @@ def generate_launch_description():
             output='screen',
             parameters=[params_yaml_file],
             remappings=remappings),
-
         # PLANNER (global path planning)
         Node(
             package='nav2_planner',
@@ -91,7 +89,6 @@ def generate_launch_description():
             parameters=[params_yaml_file],
             remappings=remappings
         ),
-
         # CONTROLLER (path following / local planber)
         Node(
             package='nav2_controller',
@@ -101,7 +98,6 @@ def generate_launch_description():
             parameters=[params_yaml_file],
             remappings=[]
         ),
-
         # RECOVERIES (recovery behaviours)
         Node(
             package='nav2_behaviors',
@@ -111,8 +107,6 @@ def generate_launch_description():
             parameters=[params_yaml_file],
             remappings=remappings
         ),
-
-
         # WAYPOINT NAV (app that launch the Bt navigator)
         Node(
             package='nav2_waypoint_follower',
@@ -121,7 +115,6 @@ def generate_launch_description():
             output='screen',
             parameters=[params_yaml_file],
             remappings=remappings),
-
         # LIFECYCLE MANAGER
         Node(
             package='nav2_lifecycle_manager',
@@ -138,7 +131,7 @@ def generate_launch_description():
                                         'behavior_server',
                                         'waypoint_follower'
                                         ]
-                         }
-                        ]
+                        }
+            ]
         )
     ])
