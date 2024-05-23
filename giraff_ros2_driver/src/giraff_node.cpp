@@ -341,7 +341,7 @@ int main(int argc, char** argv)
             odom.twist.twist.linear.y = 0.0;
             odom.twist.twist.angular.z = ang_vel;
             // publish the odometry
-            odom_pub->publish(odom);
+            //odom_pub->publish(odom);
 
             if (publish_odometry_over_tf)
             {
