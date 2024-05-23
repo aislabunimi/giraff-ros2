@@ -91,7 +91,7 @@ def launch_setup(context, *args, **kwargs):
         #),
         ]
     astra_camera_down = [TimerAction(
-        period=2,
+        period=2.0,
         actions=[
             IncludeLaunchDescription(
                 PythonLaunchDescriptionSource(
