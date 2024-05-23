@@ -93,7 +93,7 @@ def launch_setup(context, *args, **kwargs):
         Node(
             package='topic_tools',
             executable='throttle',
-            arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
+            arguments=['messages', f'/{namespace}/camera_up/depth/points', '15.0'],
         ),
         ]
     astra_camera_down = [TimerAction(
@@ -165,10 +165,11 @@ def launch_setup(context, *args, **kwargs):
 
     point_cloud_to_laser_scan = [TimerAction(
         period=3.0,
-        actions=[Node(
+        actions=[PushRosNamespace(namespace),
+                 Node(
             package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
-            remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
-                        ('scan', [namespace, '/laser_scan_camera_up'])],
+            remappings=[('cloud_in', [f'/{namespace}/camera_up', '/depth', '/points_throttle']),
+                        ('scan', [f'/{namespace}/laser_scan_camera_up'])],
             parameters=[{
                 'target_frame': f'{namespace}_laser_link',
                 'transform_tolerance': 0.01,
