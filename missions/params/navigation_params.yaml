@@ -197,7 +197,7 @@ $(var namespace):
         height: 3
         resolution: 0.05
         robot_radius: 0.22
-        plugins: ["voxel_layer", "inflation_layer"]
+        plugins: ["voxel_layer", "static_layer", "inflation_layer"]
         inflation_layer:
           plugin: "nav2_costmap_2d::InflationLayer"
           cost_scaling_factor: 3.0
@@ -237,7 +237,7 @@ $(var namespace):
         robot_radius: 0.22
         resolution: 0.05
         track_unknown_space: true
-        plugins: ["static_layer", "inflation_layer"]
+        plugins: ["static_layer", "obstacle_layer",  "inflation_layer"]
         obstacle_layer:
           plugin: "nav2_costmap_2d::ObstacleLayer"
           enabled: True
