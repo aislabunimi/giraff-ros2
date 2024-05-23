@@ -24,7 +24,13 @@ from ament_index_python.packages import get_package_share_directory
 from launch.frontend.parse_substitution import parse_substitution
 import xacro
 
+# GIRAFF YELLOW
 NAMESPACE = 'giraff_yellow'
+camera_up_serial_number = '18072330021'
+camera_down_serial_number = '18072430160'
+camera_down_tf = ["0.06", "0.0", "0.95", "0", "-0.2", "0"]
+camera_up_tf = ["0.1", "-0.02", "1.6", "0.0", "0.8", "0"]
+
 
 def launch_setup(context, *args, **kwargs):
 
@@ -78,7 +84,7 @@ def launch_setup(context, *args, **kwargs):
                 os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
             ),
             launch_arguments={
-                'serial_number': '18072330021',
+                'serial_number': camera_up_serial_number,
                 'camera_name': 'camera_up',
                 'device_num': '2',
                 'namespace': namespace
@@ -99,7 +105,7 @@ def launch_setup(context, *args, **kwargs):
                     os.path.join(get_package_share_directory('astra_camera'), 'launch', 'astra.launch.py')
                 ),
                 launch_arguments={
-                    'serial_number': '18072430160',
+                    'serial_number': camera_down_serial_number,
                     'camera_name': 'camera_down',
                     'device_num': '2',
                     'namespace': namespace,
@@ -113,17 +119,18 @@ def launch_setup(context, *args, **kwargs):
         ]
     )]
 
-    astra_cameras_tf = [TimerAction(period=3.0,
+    astra_cameras_tf = [TimerAction(period=2.0,
                                     actions=[
+                                        PushRosNamespace(namespace),
                                         Node(
                                             package="tf2_ros",
                                             executable="static_transform_publisher",
-                                            arguments=["0.06", "0.0", "0.95", "0", "-0.2", "0", "giraff_yellow_base_link", "giraff_yellow_camera_down_link"],
+                                            arguments=camera_down_tf + [f"{namespace}_base_link", f"{namespace}_camera_down_link"],
                                         ),
                                         Node(
                                             package="tf2_ros",
                                             executable="static_transform_publisher",
-                                            arguments=["0.1", "-0.02", "1.6", "0.0", "0.8", "0", "giraff_yellow_base_link", "giraff_yellow_camera_up_link"],
+                                            arguments=camera_up_tf + [f"{namespace}_base_link", f"{namespace}_camera_up_link"],
                                         )
                                     ])]
 
@@ -161,7 +168,7 @@ def launch_setup(context, *args, **kwargs):
         actions=[Node(
             package='pointcloud_to_laserscan', executable='pointcloud_to_laserscan_node',
             remappings=[('cloud_in', [namespace, '/camera_up', '/depth', '/points']),
-                        ('scan', [namespace, '/laser_scan_local'])],
+                        ('scan', [namespace, '/laser_scan_camera_up'])],
             parameters=[{
                 'target_frame': f'{namespace}_laser_link',
                 'transform_tolerance': 0.01,
