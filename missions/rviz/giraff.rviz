@@ -146,60 +146,6 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
-            giraff_yellow_base_footprint:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-            giraff_yellow_base_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_body:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_camera_down_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_camera_up_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_head:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_laser_link:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_left_wheel:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_neck:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_right_wheel:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
-            giraff_yellow_screen:
-              Alpha: 1
-              Show Axes: false
-              Show Trail: false
-              Value: true
           Mass Properties:
             Inertia: false
             Mass: false
@@ -338,7 +284,7 @@ Visualization Manager:
       Color: 87; 227; 137
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -359,7 +305,7 @@ Visualization Manager:
         Value: /giraff_yellow/camera_down/depth/points_throttle
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -372,7 +318,7 @@ Visualization Manager:
       Color: 53; 132; 228
       Color Transformer: FlatColor
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -393,7 +339,7 @@ Visualization Manager:
         Value: /giraff_yellow/camera_up/depth/points_throttle
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 183; 194; 217
