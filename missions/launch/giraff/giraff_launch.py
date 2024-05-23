@@ -90,11 +90,11 @@ def launch_setup(context, *args, **kwargs):
                 'namespace': namespace
             }.items()
         ),
-        #Node(
-        #    package='topic_tools',
-        #    executable='throttle',
-        #    arguments=['messages', f'/{namespace}/camera_up/depth/points', '10.0'],
-        #),
+        Node(
+            package='topic_tools',
+            executable='throttle',
+            arguments=['messages', f'/{namespace}/camera_up/depth/points', '1.0'],
+        ),
         ]
     astra_camera_down = [TimerAction(
         period=2.0,
@@ -111,11 +111,11 @@ def launch_setup(context, *args, **kwargs):
                     'namespace': namespace,
                 }.items()
             ),
-            #Node(
-            #    package='topic_tools',
-            #    executable='throttle',
-            #    arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
-            #)
+            Node(
+                package='topic_tools',
+                executable='throttle',
+                arguments=['messages', f'/{namespace}/camera_down/depth/points', '1.0' ],
+            )
         ]
     )]
 
