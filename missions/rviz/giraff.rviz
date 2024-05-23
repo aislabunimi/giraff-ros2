@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Giraff1
+        - /Giraff1/Map1
         - /Giraff1/RobotModel1
         - /Giraff1/Path1
         - /Giraff1/Path1/Topic1
@@ -46,13 +47,13 @@ Visualization Manager:
             Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /map
+            Value: /giraff_yellow/map
           Update Topic:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /map_updates
+            Value: /giraff_yellow/map_updates
           Use Timestamp: false
           Value: true
         - Angle Tolerance: 0.10000000149011612
@@ -146,6 +147,60 @@ Visualization Manager:
             Expand Link Details: false
             Expand Tree: false
             Link Tree Style: Links in Alphabetic Order
+            giraff_yellow_base_footprint:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            giraff_yellow_base_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_body:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_camera_down_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_camera_up_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_head:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_laser_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_left_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_neck:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_right_wheel:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            giraff_yellow_screen:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
           Mass Properties:
             Inertia: false
             Mass: false
@@ -386,25 +441,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.1572442054748535
+      Distance: 17.55752944946289
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.6053274273872375
-        Y: 0.3307373523712158
-        Z: 0.6884835958480835
+        X: -4.138213157653809
+        Y: -3.561800241470337
+        Z: 0.7830424904823303
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.0003970861434937
+      Pitch: 0.7547972202301025
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.820413112640381
+      Yaw: 5.975425720214844
     Saved: ~
 Window Geometry:
   Displays:
